@@ -12,10 +12,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.OutlinedTextField
@@ -140,14 +142,30 @@ class MainActivity : ComponentActivity() {
                             color = Color.White,
                         )
                 ) {
+
+                    // we can also use verticalScroll(scrollstate) at the place of LazyColumn.
+
                     LazyColumn {
                         items(names){
                                 cout->
-                            Text(text = cout,
-                                modifier = Modifier
-                                    .padding(10.dp)
-                                    .fillMaxWidth()
-                            )
+                                androidx.compose.foundation.layout.Column {
+
+                                Text(
+                                    text = cout,
+                                    modifier = Modifier
+                                        .padding(10.dp)
+                                        .fillMaxWidth()
+                                )
+                                    Button(
+                                        onClick = {
+                                            names = names - cout
+                                        },
+                                        modifier = Modifier.width(80.dp)
+                                            .height(40.dp)
+                                    ) {
+                                        Text(text = "Del")
+                                    }
+
                             Divider()
                         }
                     }
@@ -156,6 +174,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+    }
 
     
 //@Composable
